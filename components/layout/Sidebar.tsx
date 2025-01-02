@@ -6,9 +6,13 @@ import { IoMdNotifications } from "react-icons/io";
 import { SiGooglemessages } from "react-icons/si";
 import { FaUserLarge } from "react-icons/fa6";
 import SidebarLogo from "./SidebarLogo";
+import SidebarItem from "./SidebarItem";
+import { MdOutlineMessage } from "react-icons/md";
+import { ModeToggle } from "../ModeToggle";
+import { GrLogout } from "react-icons/gr";
+import SidebarTweetbutton from "./SidebarTweetButton";
 
 
-document.body.append('<i data-lucide="search"></i>');  
 
 const Sidebar = () => {
   const items = [
@@ -29,7 +33,7 @@ const Sidebar = () => {
     },
     {
       label: "Messages",
-      icon: SiGooglemessages,
+      icon: MdOutlineMessage,
       href: "/messages",
     },
     {
@@ -37,27 +41,20 @@ const Sidebar = () => {
       icon: FaUserLarge,
       href: "/profile",
     },
-    {
-      label: "Home",
-      icon: HiHome,
-      href: "/",
-    },
-    {
-      label: "Home",
-      icon: HiHome,
-      href: "/",
-    },
-    {
-      label: "Home",
-      icon: HiHome,
-      href: "/",
-    },
   ];
   return (
     <div className="col-span-1 h-full pr-4 md:pr-6">
         <div className="flex flex-col items-end">
-            <div className="space-y-2 lg:w-[230px">
-                <SidebarLogo/>
+            <div className="space-y-2 lg:w-[230px]">
+                <SidebarLogo />
+                {
+                  items.map((i)=>(
+                    <SidebarItem key={i.href} href={i.href} label={i.label} icon={i.icon}/>
+                  ))
+                }
+                <SidebarItem label="Theme" icon={ModeToggle} href="#" />             
+                <SidebarItem label="Logout" icon={GrLogout} onClick={()=>{}} />
+                <SidebarTweetbutton/>             
             </div>
         </div>
     </div>
