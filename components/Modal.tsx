@@ -42,3 +42,5 @@ const Modal:React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, title, body, fo
 };
 
 export default Modal;
+
+// 36.02 hr
