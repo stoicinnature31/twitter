@@ -1,6 +1,6 @@
 
 interface ButtonProps{
-    label:string,
+    label?:string,
     disabled:boolean,
     outline: boolean,
     onClick: ()=>void,
