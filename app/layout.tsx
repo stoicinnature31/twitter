@@ -1,3 +1,4 @@
+
 import LoginModal from "@/components/modals/LoginModal";
 import OuterLayer from "@/components/outerlayer";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -7,7 +8,7 @@ import "./globals.css";
 import RegisterModal from "@/components/modals/RegisterModal";
 import { Toaster } from "react-hot-toast";
 
-const geistSans = Geist({ 
+const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -31,18 +32,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange>
-          <OuterLayer>
-            <Toaster/>
-            <LoginModal />
-            <RegisterModal />
-            {children}
-          </OuterLayer>
-        </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange>
+            <OuterLayer>
+              <Toaster />
+              <LoginModal />
+              <RegisterModal />
+              {children}
+            </OuterLayer>
+          </ThemeProvider>
       </body>
     </html>
   );

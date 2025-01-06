@@ -24,29 +24,41 @@ const RegisterModal = () => {
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true);
-      // Add Register & Login
+      if (!email || !password || !name || !username) {
+        toast.error("Please fill in all fields");
+        return;
+      }
+      console.log(`Email: ${email} , Password: ${password} , Name: ${name}, UserName: ${username}`);
+      
+  
       await axios.post("/api/register", {
         email,
         password,
         username,
         name,
       });
-
+  
       toast.success("Account Created Successfully!");
-
-      signIn("credentials", {
+  
+      const response = await signIn("credentials", {
         email,
         password,
+        redirect: false,
       });
-
-      RegisterModal.onClose();
+  
+      if (response?.error) {
+        toast.error(response.error);
+      } else {
+        RegisterModal.onClose();
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Error: ",error);
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
   }, [RegisterModal, email, password, username, name]);
+  
 
   //  onToggle Function
   const onToggle = useCallback(() => {

@@ -1,23 +1,24 @@
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import NextAuth from "next-auth";
-import CredentialProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import prisma from "@/libs/prismadb";
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    CredentialProvider({
+    CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: "Email", type: "email", required: true },
+        password: { label: "Password", type: "password", required: true },
       },
 
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password)
-          throw new Error("Wrong Email or Password");
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Invalid email or password");
+        }
 
         const user = await prisma.user.findUnique({
           where: {
@@ -25,22 +26,25 @@ export default NextAuth({
           },
         });
 
-        if (!user || !user?.hashedPassword)
-          throw new Error("User does not exist");
+        if (!user || !user.hashedPassword) {
+          throw new Error("Invalid email or password");
+        }
 
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
         );
 
-        if (!isCorrectPassword) throw new Error("Wrong Password");
+        if (!isCorrectPassword) {
+          throw new Error("Invalid password");
+        }
 
         return user;
       },
     }),
   ],
 
-  debug: process.env.NODE_ENV == "development",
+  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
   },
