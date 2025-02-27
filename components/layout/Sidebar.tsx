@@ -1,15 +1,14 @@
 "use client"; 
 
-import { HiHome } from "react-icons/hi2";
 import { Search } from 'lucide-react';
-import { IoMdNotifications } from "react-icons/io";
-import { SiGooglemessages } from "react-icons/si";
 import { FaUserLarge } from "react-icons/fa6";
-import SidebarLogo from "./SidebarLogo";
-import SidebarItem from "./SidebarItem";
+import { GrLogout } from "react-icons/gr";
+import { HiHome } from "react-icons/hi2";
+import { IoMdNotifications } from "react-icons/io";
 import { MdOutlineMessage } from "react-icons/md";
 import { ModeToggle } from "../ModeToggle";
-import { GrLogout } from "react-icons/gr";
+import SidebarItem from "./SidebarItem";
+import SidebarLogo from "./SidebarLogo";
 import SidebarTweetbutton from "./SidebarTweetButton";
 
 
